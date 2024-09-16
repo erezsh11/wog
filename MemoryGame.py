@@ -19,7 +19,10 @@ def play_game(difficulty):
     user_list = get_list_from_user(difficulty)
     if is_list_equal(sequence, user_list):
         print("Congratulations ! ,You won")
+        return True
     else:
         print("Sorry,you lost")
+        return False
+
 
 

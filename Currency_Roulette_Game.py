@@ -1,7 +1,7 @@
 import requests
 import random
 
-api_url = (" https://v6.exchangerate-api.com/v6/e1fbb9f18daa341e45b71b0d/latest/USD")
+api_url = ("https://v6.exchangerate-api.com/v6/e1fbb9f18daa341e45b71b0d/latest/USD")
 
 def get_money_interval(difficulty,total_value):
     differnce = 5 - difficulty
@@ -44,9 +44,12 @@ def play_game(difficulty):
     guess = get_guess_from_user()
     if lower_bound <= guess <= upper_bound:
         print("Congratulations! Your guess is correct.")
+        return True
     else:
         print(f"Sorry, your guess {guess:.4f} was not within the correct range.")
         print(f"The correct exchange rate is {exchange_rate:.4f}")
+        return False
+
 
 
 

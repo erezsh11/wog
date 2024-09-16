@@ -1,6 +1,7 @@
 import MemoryGame
 import GuessGame
 import Currency_Roulette_Game
+from Score import add_score, BAD_RETURN_CODE
 
 def welcome(name):
     return f"Hello {name} and welcome to the World of Games (WoG).\nHere you can find many cool games to play."
@@ -14,7 +15,6 @@ def load_game():
                             "Enter your choice (1-3): "))
     while True:
         try:
-          #  game_choice = int(input("Enter your choice (1-3): "))
             if game_choice in [1, 2, 3]:
                 break
             else:
@@ -33,10 +33,20 @@ def load_game():
             print("Invalid input. Please enter a number.")
 
     if game_choice == 1:
-        MemoryGame.play_game(difficulty_level)
+        result = MemoryGame.play_game(difficulty_level)
     elif game_choice == 2:
-        GuessGame.play_game(difficulty_level)
+        result = GuessGame.play_game(difficulty_level)
     elif game_choice == 3:
-        Currency_Roulette_Game.play_game(difficulty_level)
+        result = Currency_Roulette_Game.play_game(difficulty_level)
     else:
         print("Invalid choice. Please enter 1, 2, or 3.")
+
+
+    if result:
+        try:
+            add_score(difficulty_level)
+        except Exception as e:
+            print(f"Error updating score: {e}")
+            return BAD_RETURN_CODE
+    return result
+
